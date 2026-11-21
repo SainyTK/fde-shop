@@ -29,7 +29,7 @@ export function SearchBar() {
         onChange={(event) => setText(event.target.value)}
         placeholder="ค้นหาสินค้า แบรนด์ หรือร้านค้า"
         aria-label="ค้นหาสินค้า"
-        className="h-full min-w-0 flex-1 bg-transparent px-2 text-foreground text-sm outline-none placeholder:text-muted-foreground"
+        className="h-full min-w-0 flex-1 bg-transparent px-2 text-foreground text-sm outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:appearance-none"
       />
       <button
         type="submit"
