@@ -57,7 +57,7 @@ export function AccountMenu({ tone }: AccountMenuProps) {
         <span className="flex size-6 items-center justify-center rounded-full bg-white/90 font-semibold text-primary text-xs ring-1 ring-black/5">
           {user.name.slice(0, 1)}
         </span>
-        <span className="max-w-32 truncate">{user.name}</span>
+        <span className="hidden max-w-32 truncate sm:inline">{user.name}</span>
         <ChevronDown className="size-3.5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

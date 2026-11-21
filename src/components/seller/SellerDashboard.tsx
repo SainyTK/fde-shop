@@ -125,7 +125,14 @@ export function SellerDashboard({ seller }: { seller: User }) {
       </Panel>
       <div className="grid gap-5 lg:grid-cols-[1fr_22rem]">
         <Panel title="ยอดขายรายวัน (บาท)">
-          <SalesChart data={sales} />
+          {revenue > 0 ? (
+            <SalesChart data={sales} />
+          ) : (
+            <EmptyState
+              icon={CircleDollarSign}
+              title="ยังไม่มียอดขายใน 14 วันที่ผ่านมา"
+            />
+          )}
         </Panel>
         <Panel
           title="แจ้งเตือนสต็อก"
@@ -184,28 +191,32 @@ export function SellerDashboard({ seller }: { seller: User }) {
           </Link>
         }
       >
-        <ul className="-my-2.5 divide-y">
-          {orders.slice(0, 6).map((order) => (
-            <li key={order.id}>
-              <Link
-                href={`/seller/orders/${order.id}`}
-                className="flex items-center gap-3 py-2.5 text-sm hover:text-primary"
-              >
-                <span className="w-32 shrink-0 font-mono text-xs">
-                  #{order.number}
-                </span>
-                <span className="hidden min-w-0 flex-1 truncate sm:block">
-                  {order.items.map((item) => item.name).join(", ")}
-                </span>
-                <span className="ml-auto shrink-0 tabular-nums">
-                  {formatPrice(order.total)}
-                </span>
-                <OrderStatusBadge status={order.status} />
-                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {orders.length === 0 ? (
+          <EmptyState icon={ReceiptText} title="ยังไม่มีคำสั่งซื้อ" />
+        ) : (
+          <ul className="-my-2.5 divide-y">
+            {orders.slice(0, 6).map((order) => (
+              <li key={order.id}>
+                <Link
+                  href={`/seller/orders/${order.id}`}
+                  className="flex items-center gap-3 py-2.5 text-sm hover:text-primary"
+                >
+                  <span className="w-32 shrink-0 font-mono text-xs">
+                    #{order.number}
+                  </span>
+                  <span className="hidden min-w-0 flex-1 truncate sm:block">
+                    {order.items.map((item) => item.name).join(", ")}
+                  </span>
+                  <span className="ml-auto shrink-0 tabular-nums">
+                    {formatPrice(order.total)}
+                  </span>
+                  <OrderStatusBadge status={order.status} />
+                  <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </Panel>
     </>
   );

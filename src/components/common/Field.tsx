@@ -10,7 +10,7 @@ type FieldProps = {
 
 export function Field({ id, label, hint, children }: FieldProps) {
   return (
-    <div className="grid gap-1.5">
+    <div className="grid content-start gap-1.5">
       <Label htmlFor={id}>{label}</Label>
       {children}
       {hint ? <p className="text-muted-foreground text-xs">{hint}</p> : null}

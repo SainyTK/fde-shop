@@ -135,6 +135,7 @@ export function SellerProductList({ seller }: { seller: User }) {
                         <Button
                           variant="ghost"
                           size="sm"
+                          nativeButton={false}
                           render={
                             <Link href={`/seller/products/${product.id}`} />
                           }

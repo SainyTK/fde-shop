@@ -68,6 +68,7 @@ export function ProductEditor({
             <div className="flex gap-2">
               <Button
                 variant="outline"
+                nativeButton={false}
                 render={
                   <Link href={`/products/${product.id}`} target="_blank" />
                 }

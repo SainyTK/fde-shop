@@ -1,7 +1,6 @@
 "use client";
 
-import { TicketPercent, Trash2 } from "lucide-react";
-import { toast } from "sonner";
+import { TicketPercent } from "lucide-react";
 import { EmptyState, PageTitle, StatusBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -17,6 +16,7 @@ import {
   isCouponExpired,
 } from "@/utils";
 import { CouponDialog } from "./CouponDialog";
+import { DeleteCouponButton } from "./DeleteCouponButton";
 
 function couponState(
   coupon: Coupon,
@@ -37,7 +37,6 @@ function couponState(
 export function CouponManager({ seller }: { seller: User }) {
   const coupons = useSellerCoupons(seller.id);
   const setCouponActive = useShopStore((state) => state.setCouponActive);
-  const deleteCoupon = useShopStore((state) => state.deleteCoupon);
   const now = new Date().toISOString();
 
   return (
@@ -114,17 +113,7 @@ export function CouponManager({ seller }: { seller: User }) {
                         label="แก้ไข"
                         trigger={<Button variant="ghost" size="sm" />}
                       />
-                      <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        aria-label={`ลบ ${coupon.code}`}
-                        onClick={() => {
-                          deleteCoupon(coupon.id);
-                          toast.success(`ลบคูปอง ${coupon.code} แล้ว`);
-                        }}
-                      >
-                        <Trash2 />
-                      </Button>
+                      <DeleteCouponButton coupon={coupon} />
                     </div>
                   </div>
                 </div>
