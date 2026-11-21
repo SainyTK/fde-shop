@@ -3,7 +3,7 @@
 FDE Shop is a Shopee-style marketplace built for the FDE 101 Web e-commerce workshop.
 Sellers list products and manage their stock, and buyers shop, apply coupons, pay by PromptPay with a transfer slip and track their deliveries.
 
-Live: LIVE_URL
+Live: https://fde-shop.vercel.app
 
 ## Demo logins
 
