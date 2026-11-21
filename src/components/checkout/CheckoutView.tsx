@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, ShoppingCart } from "lucide-react";
+import { Loader2, MapPin, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -26,6 +26,7 @@ export function CheckoutView({ buyer }: { buyer: User }) {
     {},
   );
   const [notes, setNotes] = useState<Record<string, string>>({});
+  const [placed, setPlaced] = useState(false);
   const now = useMemo(() => new Date().toISOString(), []);
 
   const totals = groups.map((group) => {
@@ -38,6 +39,14 @@ export function CheckoutView({ buyer }: { buyer: User }) {
   });
   const sum = (key: "subtotal" | "discount" | "shippingFee" | "total") =>
     totals.reduce((total, item) => total + item[key], 0);
+
+  if (placed) {
+    return (
+      <div className="flex justify-center rounded-sm bg-white py-16">
+        <Loader2 className="size-6 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (groups.length === 0) {
     return (
@@ -76,6 +85,7 @@ export function CheckoutView({ buyer }: { buyer: User }) {
       toast.error(result.error);
       return;
     }
+    setPlaced(true);
     toast.success("สั่งซื้อสำเร็จ กรุณาชำระเงินและอัปโหลดสลิป");
     router.replace(
       result.value.length === 1
